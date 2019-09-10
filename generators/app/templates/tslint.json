@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-plugin-prettier",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "prettier": true,
+    "interface-name": [true, "never-prefix"],
+    "no-implicit-dependencies": false,
+    "trailing-comma": false,
+    "ordered-imports": false
+  }
+}
