@@ -1,0 +1,11 @@
+{
+  "name": "<%= name %>",
+  "description": "<%= description %>",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "tsc": "tsc",
+    "legacy": "webpack --config legacy/webpack.config.js"
+  }
+}

@@ -63,6 +63,7 @@ module.exports = class extends Generator {
       this.templatePath(".storybook/*"),
       this.destinationPath(".storybook")
     );
+    this.fs.copy(this.templatePath("jest/*"), this.destinationPath("jest"));
     this.fs.copy(
       this.templatePath("packages/*"),
       this.destinationPath("packages")
@@ -70,6 +71,10 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath("jest.config.js"),
       this.destinationPath("jest.config.js")
+    );
+    this.fs.copy(
+      this.templatePath("index.html"),
+      this.destinationPath("index.html")
     );
     this.fs.copy(
       this.templatePath("lerna.json"),
