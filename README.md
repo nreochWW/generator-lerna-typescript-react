@@ -1,6 +1,6 @@
 # generator-lerna-typescript-react
 
-#### [Yeoman] Generator for scaffolding a repository **([lerna-typescript-react])** and individual packages for building re-usable component libraries with React and Typescript. We use [Lerna] which is a deployment tool for serverless monorepos that optimizes the workflow around multi-package repositories with Git and NPM.
+#### [Yeoman] Generator for scaffolding a repository **([lerna-typescript-react])** and individual packages for building re-usable component libraries with React and Typescript. We use [Lerna] which is a deployment tool for serverless monorepos that optimize the workflow around multi-package repositories with Git and NPM.
 
 [yeoman]: https://yeoman.io/
 [lerna-typescript-react]: https://github.com/nreochWW/lerna-typescript-react
@@ -25,13 +25,13 @@ $ cd monorepo-test-example
 ```
 
 Generate your project with yoeman using generator-lerna-typescript-react\
-Provide a name that is the camel case version of you directory name
+Provide a name that is the camel case version of your directory name
 
 ```sh
 $ yo lerna-typescript-react monorepoTestExample
 ```
 
-Optionally you can provide you library name and description\
+Optionally you can provide your library name and description\
 Or you can leave the default values
 
 ```sh
@@ -39,8 +39,8 @@ $ ? author name (WW)
 $ ? project description (an example Monorepo React Typescript component library)
 ```
 
-Yeoman will then scaffold out the project files and directories and install the dependencies
-Below is the files and directory structure you will see in your newly created repo
+Yeoman will then scaffold out the project files and directories and install the dependencies.
+Below is the file and directory structure you will see in your newly created repo
 
 ```
 monorepo-test-example/
@@ -67,8 +67,7 @@ monorepo-test-example/
   yarn.lock
 ```
 
-The packages directory is where you different components will be generated\
-We will go through the rest of the files and there purpose later
+The packages directory is where your different components will be generated
 
 Create a local and remote Git repository to push your changes too commit
 
@@ -82,7 +81,7 @@ $ git push origin master
 
 # Instructions for generating packages
 
-Generate your individual packages with yoeman using the generator-lerna-typescript-react:package sub generator\
+Generate your individual packages with Yeoman using the generator-lerna-typescript-react:package sub generator\
 You will need to provide a name and description for you package
 
 ```sh
@@ -92,7 +91,7 @@ $ ? package description This is the first package I have created
 ```
 
 Yeoman will then scaffold out the package files and directories
-Below is the files and directory structure you will see in your newly created package
+Below is the file and directory structure you will see in your newly created package
 
 ```
 monorepo-test-example/
@@ -154,7 +153,7 @@ $ yarn lint
 $ yarn test
 ```
 
-There will for now just be simple snapshot test in the \***\*tests\*\*** directory\
+There is a simple snapshot test in the \***\*tests\*\*** directory\
 Note: Remember to run _yarn test -u_ to update snapshots
 
 ```
@@ -226,7 +225,7 @@ $ ? package name TestExampleTwo
 $ ? package description This is the second package I have created
 ```
 
-You will now have a directory TestExampleTwo sitting along side TestExampleOne\
+You will now have a directory TestExampleTwo sitting along side TestExampleOne
 
 Go into the package.json file of TestExampleTwo and add your TestExampleOne package as a dependency\
 this is how your package.json should now look
@@ -282,6 +281,12 @@ Lerna can bootstrap our packages which means they will symlink the packages for 
 $ yarn bootstrap
 ```
 
+Run the typescript compiler
+
+```sh
+$ yarn tsc
+```
+
 Commit your new changes to your remote github
 
 ```sh
@@ -306,6 +311,18 @@ $ yarn storybook
 ```
 
 This will open up a page in your browser showing your TestExampleOne component
+
+If you have shared packages with other packages you will need to add an alias\
+to the storybook webpack configuration
+
+```
+config.resolve.alias = {
+  "test-example-one": path.resolve(__dirname, "../packages/TestExampleOne/src/index")
+};
+```
+
+This way storybook will pull your component from the **src/index.tsx** instead of node_modules\
+which do not get bundled by webpack.
 
 # TODO
 
