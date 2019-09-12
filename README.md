@@ -172,7 +172,7 @@ describe("TestExampleOne package tests", () => {
 });
 ```
 
-# WORKFLOW 1 - Build and publish to a private NPM registry
+# Instructions for WORKFLOW 1 - Build and publish to a private NPM registry
 
 Run the typescript compiler on your packages
 
@@ -200,15 +200,114 @@ $ lerna publish
 
 This will start up the Lerna publish CLI and provide you with options for publishing
 
-# WORKFLOW 2 - Build for legacy external applications
+# Instructions for WORKFLOW 2 - Build for legacy external applications
 
-We need a legacy workflow as there is a requirement to be able to build\
+We need a legacy workflow as there is a requirement to be able to build
 and load components into legacy applications that are not React based on the client
 
 ```sh
 $ yarn legacy
 ```
 
-This command will go through all the different packages and build and compile\
-the code using webpack and outputting Javascript suitable for legacy applications not using React\
+This command will go through all the different packages and build and compile
+the code using webpack and outputting Javascript suitable for legacy applications not using React.
 The output of this command will create a package.js file in the **legacy/dist** directory
+
+# Instructions to Share Packages with other Packages
+
+With lerna you can share different components very easily which is a powerful feature\
+We can extend different features and build on them by sharing components
+
+Create a second package
+
+```sh
+$ yo lerna-typescript-react:package
+$ ? package name TestExampleTwo
+$ ? package description This is the second package I have created
+```
+
+You will now have a directory TestExampleTwo sitting along side TestExampleOne\
+
+Go into the package.json file of TestExampleTwo and add your TestExampleOne package as a dependency\
+this is how your package.json should now look
+
+```
+{
+  "name": "test-example-two",
+  "description": "This is the second package I have created",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "tsc": "tsc",
+    "legacy": "webpack --config legacy/webpack.config.js"
+  },
+  "dependencies": {
+    "test-example-one": "^0.0.1"
+  }
+}
+```
+
+Go into src/index.tsc in TestExampleTwo directory and import and display TestExampleOne
+
+```
+import styled from "styled-components";
+import TestExampleOne from "test-example-one";
+
+export interface TestExampleTwoProps {
+  compiler: string;
+  framework: string;
+}
+
+const Wrapper = styled.div`
+  border: 1px solid blue;
+  padding: 10px;
+`;
+
+const TestExampleTwo = (props: TestExampleTwoProps) => (
+  <Wrapper>
+    <h1>
+      Hello World from {props.compiler} and {props.framework}!
+    </h1>
+    <TestExampleOne compiler="TypeScript" framework="React" />
+  </Wrapper>
+);
+
+export default TestExampleTwo;
+```
+
+Lerna can bootstrap our packages which means they will symlink the packages for us behind the scenes
+
+```sh
+$ yarn bootstrap
+```
+
+Commit your new changes to your remote github
+
+```sh
+$ git add .
+$ git commit -m "Created TestExampleTwo package and linked with TestExampleOne"
+$ git push origin master
+```
+
+Publish your packages to NPM registry
+
+```sh
+lerna publish
+```
+
+This will start up the Lerna publish CLI and provide you with options for publishing\
+Now your component TestExampleTwo will also pull in TestExampleOne as a dependency
+
+# Develop you components in Storybook
+
+```sh
+$ yarn storybook
+```
+
+This will open up a page in your browser showing your TestExampleOne component
+
+# TODO
+
+Continuous Integration Setup with CircleCI\
+Need to pubish this Generator to a private WW NPM registry
