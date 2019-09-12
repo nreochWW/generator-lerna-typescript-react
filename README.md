@@ -6,7 +6,7 @@
 [lerna-typescript-react]: https://github.com/nreochWW/lerna-typescript-react
 [lerna]: https://github.com/lerna/lerna
 
-# Instructions for creating the parent libary repository
+# Instructions for creating the parent repository
 
 These instructions start after the repo has been cloned and linked.\
 _Note: In the future this will be installed from a private NPM registry_
@@ -37,4 +37,32 @@ Or you can leave the default values
 ```sh
 $ ? author name (WW)
 $ ? project description (an example Monorepo React Typescript component library)
+```
+
+Yeoman will then scaffold out the project files and directories and install the dependencies
+Below is the files and directory structure you will see in your newly created repo
+
+```
+monorepo-test-example/
+  .storybook/
+    config.js
+    tsconfig.json
+    webpack.config.js
+  .jest/
+    setupTests.ts
+  node_modules/
+  packages/
+    README.md
+  .gitignore
+  .npmrc
+  .prettierrc
+  .stylelintrc
+  index.html
+  jest.config.js
+  lerna.json
+  package.json
+  README.md
+  tsconfig.json
+  tslint.json
+  yarn.lock
 ```
