@@ -42,6 +42,14 @@ module.exports = class extends Generator {
         description: this.answers.description
       }
     );
+    this.fs.copyTpl(
+      this.templatePath("README.md"),
+      this.destinationPath("README.md"),
+      {
+        libraryname: _.kebabCase(this.options.libraryname),
+        description: this.answers.description
+      }
+    );
     this.fs.copy(
       this.templatePath("yarn.lock"),
       this.destinationPath("yarn.lock")

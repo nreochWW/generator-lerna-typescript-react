@@ -43,6 +43,14 @@ module.exports = class extends Generator {
       }
     );
     this.fs.copyTpl(
+      this.templatePath("README.md"),
+      this.destinationPath(`packages/${this.answers.name}/README.md`),
+      {
+        name: _.kebabCase(this.answers.name),
+        description: this.answers.description
+      }
+    );
+    this.fs.copyTpl(
       this.templatePath("__tests__/*"),
       this.destinationPath(`packages/${this.answers.name}/__tests__`),
       {
