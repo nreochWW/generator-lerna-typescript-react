@@ -66,3 +66,6 @@ monorepo-test-example/
   tslint.json
   yarn.lock
 ```
+
+The packages directory is where you differe components will be generated\
+We will go through the rest of the files and there purpose later
