@@ -70,6 +70,12 @@ monorepo-test-example/
 The packages directory is where you different components will be generated\
 We will go through the rest of the files and there purpose later
 
+Initialize Git repo
+
+```sh
+$ git init
+```
+
 # Instructions for generating packages
 
 Generate your individual packages with yoeman using the generator-lerna-typescript-react:package sub generator\
@@ -132,3 +138,43 @@ const TestExampleOne = (props: TestExampleOneProps) => (
 
 export default TestExampleOne;
 ```
+
+# Run formatter, tests and linting
+
+These commands will run on all the packages you have created\
+We need to run prettier first to format the code so the linter does not fail
+
+```sh
+$ yarn prettier
+$ yarn lint
+$ yarn test
+```
+
+There will for now just be simple snapshot test in the \***\*tests\*\*** directory\
+Note: Remember to run _yarn test -u_ to update snapshots
+
+```
+import * as React from "react";
+import { shallow } from "enzyme";
+import TestExampleOne from "../src/index";
+
+describe("TestExampleOne package tests", () => {
+  it("matches snapshot", () => {
+    const wrapper = shallow(
+      <TestExampleOne compiler="TypeScript" framework="React" />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+```
+
+# WORKFLOW 1 - Build and publish to a private NPM registry
+
+Run the typescript compiler on your packages
+
+```sh
+$ yarn tsc
+```
+
+This will look through all your packages and run typescript on the tsc files\
+Build files will be placed into the lib directory ready for publishing to NPM
