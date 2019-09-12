@@ -70,10 +70,14 @@ monorepo-test-example/
 The packages directory is where you different components will be generated\
 We will go through the rest of the files and there purpose later
 
-Initialize Git repo
+Create a local and remote Git repository to push your changes too commit
 
 ```sh
 $ git init
+$ git add .
+$ git commit -m "initial commit"
+$ git remote add origin git@github.com:nreochWW/monorepo-test-example.git
+$ git push origin master
 ```
 
 # Instructions for generating packages
@@ -178,3 +182,33 @@ $ yarn tsc
 
 This will look through all your packages and run typescript on the tsc files\
 Build files will be placed into the lib directory ready for publishing to NPM
+
+Push your new package to Github locally and remotely
+
+```sh
+$ git add .
+$ git commit -m "Generated TestExampleOne package"
+$ git push origin master
+```
+
+Publish your package to your NPM registry\
+Note: you will need to set the registry url for your NPM config
+
+```sh
+$ lerna publish
+```
+
+This will start up the Lerna publish CLI and provide you with options for publishing
+
+# WORKFLOW 2 - Build for legacy external applications
+
+We need a legacy workflow as there is a requirement to be able to build\
+and load components into legacy applications that are not React based on the client
+
+```sh
+$ yarn legacy
+```
+
+This command will go through all the different packages and build and compile\
+the code using webpack and outputting Javascript suitable for legacy applications not using React\
+The output of this command will create a package.js file in the **legacy/dist** directory
