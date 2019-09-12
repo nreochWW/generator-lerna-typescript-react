@@ -6,7 +6,7 @@
 [lerna-typescript-react]: https://github.com/nreochWW/lerna-typescript-react
 [lerna]: https://github.com/lerna/lerna
 
-# Instructions for creating the parent repository
+# Instructions for generating the parent repository
 
 These instructions start after the repo has been cloned and linked.\
 _Note: In the future this will be installed from a private NPM registry_
@@ -67,5 +67,68 @@ monorepo-test-example/
   yarn.lock
 ```
 
-The packages directory is where you differe components will be generated\
+The packages directory is where you different components will be generated\
 We will go through the rest of the files and there purpose later
+
+# Instructions for generating packages
+
+Generate your individual packages with yoeman using the generator-lerna-typescript-react:package sub generator\
+You will need to provide a name and description for you package
+
+```sh
+$ yo lerna-typescript-react:package
+$ ? package name TestExampleOne
+$ ? package description This is the first package I have created
+```
+
+Yeoman will then scaffold out the package files and directories
+Below is the files and directory structure you will see in your newly created package
+
+```
+monorepo-test-example/
+  ...
+  packages/
+    TestExampleOne/
+      __tests__/
+      legacy/
+        index.tsx
+        tsconfig.json
+        webpack.config.js
+      src/
+        index.tsx
+      stories/
+        TestExampleOne.stories.tsx
+      .npmignore
+      package.json
+      README.md
+      tsconfig.json
+    README.md
+```
+
+The main component code will be located in **src/index.tsx**\
+This is a simple Hello World React and Typescript component to start building with
+
+```
+import * as React from "react";
+import styled from "styled-components";
+
+export interface TestExampleOneProps {
+  compiler: string;
+  framework: string;
+}
+
+const Wrapper = styled.div`
+  border: 1px solid blue;
+  padding: 10px;
+`;
+
+const TestExampleOne = (props: TestExampleOneProps) => (
+  <Wrapper>
+    <h1>
+      Hello World from {props.compiler} and {props.framework}!
+    </h1>
+  </Wrapper>
+);
+
+export default TestExampleOne;
+```
