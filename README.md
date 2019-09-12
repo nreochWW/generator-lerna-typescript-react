@@ -6,13 +6,35 @@
 [lerna-typescript-react]: https://github.com/nreochWW/lerna-typescript-react
 [lerna]: https://github.com/lerna/lerna
 
-# Instructions
+# Instructions for creating the parent libary repository
 
-These instructions start after the repo has been cloned and linked.
+These instructions start after the repo has been cloned and linked.\
 _Note: In the future this will be installed from a private NPM registry_
 
 Install yeoman
 
 ```sh
 $ yarn global add yo
+```
+
+Create the directory for you project and cd into it
+
+```sh
+$ mkdir monorepo-test-example
+$ cd monorepo-test-example
+```
+
+Generate your project with yoeman using generator-lerna-typescript-react\
+Provide a name that is the camel case version of you directory name
+
+```sh
+$ yo lerna-typescript-react monorepoTestExample
+```
+
+Optionally you can provide you library name and description\
+Or you can leave the default values
+
+```sh
+$ ? author name (WW)
+$ ? project description (an example Monorepo React Typescript component library)
 ```
