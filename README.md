@@ -17,7 +17,7 @@ Install yeoman
 $ yarn global add yo
 ```
 
-Create the directory for you project and cd into it
+Create the directory for your project and cd into it
 
 ```sh
 $ mkdir monorepo-test-example
@@ -304,7 +304,7 @@ lerna publish
 This will start up the Lerna publish CLI and provide you with options for publishing\
 Now your component TestExampleTwo will also pull in TestExampleOne as a dependency
 
-# Develop you components in Storybook
+# Develop your components in Storybook
 
 ```sh
 $ yarn storybook
@@ -327,4 +327,4 @@ which do not get bundled by webpack.
 # TODO
 
 Continuous Integration Setup with CircleCI\
-Need to pubish this Generator to a private WW NPM registry
+Need to pubish this Generator to a private NPM registry
